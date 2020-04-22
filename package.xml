@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- This document defines the package's properties such as name, version,
+     author, and all kinds of dependencies on other catkin packages. -->
+<package format="2">
+  <!-- 
+  ##############################################################################
+  ### General package information. #############################################
+  ##############################################################################
+  -->
+  <name>g2o</name>
+  <version>0.1.0</version>
+  <description> The g2o package. Forked from the libg2o github repo of Rainer Kümmerle.
+  </description>
+  <maintainer email="winterhw@informatik.uni-freiburg.de">Wera Winterhalter</maintainer>
+  <license>TODO</license>
+  <author>Rainer Kümmerle</author>
+
+  <!-- 
+  ##############################################################################
+  ### Specify catkin packages and tools on which this package depends. #########
+  ##############################################################################
+  -->
+  <!-- Specify build system tools that this package requires 
+       to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <!-- Embed additional information needed by subsystems like catkin_tools. -->
+  <export>
+    <!-- Specify whether package is handled as catkin or cmake package. -->
+    <build_type>cmake</build_type>
+  </export>  
+</package>
