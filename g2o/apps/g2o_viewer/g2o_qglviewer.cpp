@@ -43,6 +43,9 @@
 #include <GL/glu.h>
 #endif
 
+// hack to stop camera from spinning after ROTATE
+#include <manipulatedCameraFrame.h>
+
 #include <iostream>
 using namespace std;
 
@@ -88,6 +91,7 @@ G2oQGLViewer::G2oQGLViewer(QWidget* parent, const QGLWidget* shareWidget, Qt::Wi
 {
   setAxisIsDrawn(false);
   _drawActionParameters = new DrawAction::Parameters();
+  
 }
 
 G2oQGLViewer::~G2oQGLViewer()
@@ -98,6 +102,10 @@ G2oQGLViewer::~G2oQGLViewer()
 
 void G2oQGLViewer::draw()
 {
+
+  // hack to stop camera from spinning after ROTATE
+  camera()->frame()->stopSpinning();
+    
   if (! graph)
     return;
 
@@ -141,20 +149,21 @@ void G2oQGLViewer::init()
   // don't save state
   setStateFileName(QString::null);
 
-  // mouse bindings
-#ifdef QGLVIEWER_DEPRECATED_MOUSEBINDING
-  setMouseBinding(Qt::NoModifier, Qt::RightButton, CAMERA, TRANSLATE);
-  setMouseBinding(Qt::NoModifier, Qt::MidButton, CAMERA, TRANSLATE);
-#else
-  setMouseBinding(Qt::RightButton, CAMERA, TRANSLATE);
-  setMouseBinding(Qt::MidButton, CAMERA, TRANSLATE);
-#endif
+//  // mouse bindings
+//#ifdef QGLVIEWER_DEPRECATED_MOUSEBINDING
+//  setMouseBinding(Qt::NoModifier, Qt::RightButton, CAMERA, TRANSLATE);
+//  setMouseBinding(Qt::NoModifier, Qt::MidButton, CAMERA, TRANSLATE);
+//#else
+//  setMouseBinding(Qt::RightButton, CAMERA, TRANSLATE);
+//  setMouseBinding(Qt::MidButton, CAMERA, TRANSLATE);
+//#endif
+//
+//  // keyboard shortcuts
+//  setShortcut(CAMERA_MODE, 0);
+//  setShortcut(EXIT_VIEWER, 0);
+//  //setShortcut(SAVE_SCREENSHOT, 0);
 
-  // keyboard shortcuts
-  setShortcut(CAMERA_MODE, 0);
-  setShortcut(EXIT_VIEWER, 0);
-  //setShortcut(SAVE_SCREENSHOT, 0);
-
+  
   // replace camera
   qglviewer::Camera* oldcam = camera();
   qglviewer::Camera* cam = new StandardCamera();
