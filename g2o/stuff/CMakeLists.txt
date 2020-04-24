@@ -41,7 +41,7 @@ endif()
     INCLUDES DESTINATION ${INCLUDES_DESTINATION}
     )
 
-  target_link_libraries(opengl_helper PUBLIC ${G2O_OPENGL_TARGET} ${G2O_EIGEN3_EIGEN_TARGET})
+  target_link_libraries(opengl_helper PUBLIC ${G2O_OPENGL_TARGET} ${G2O_EIGEN3_EIGEN_TARGET} freeglut_minimal)
   set_target_properties(opengl_helper PROPERTIES OUTPUT_NAME "${LIB_PREFIX}opengl_helper")
 endif()
 

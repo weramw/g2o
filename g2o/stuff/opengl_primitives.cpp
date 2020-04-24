@@ -27,6 +27,8 @@
 # include <GL/glu.h>
 #endif
 
+#include "EXTERNAL/freeglut/freeglut_minimal.h"
+
 namespace g2o {
 namespace opengl {
 
@@ -298,11 +300,17 @@ void drawSlice(GLfloat radius, GLfloat height, GLfloat fov, int slices_per_circl
   glPopMatrix();
 }
 
-  void drawPoint(float pointSize){
-    glPointSize(pointSize);
-    glBegin(GL_POINTS);
-    glVertex3f(0,0,0);
-    glEnd();
-  }
+void drawPoint(float pointSize){
+  glPointSize(pointSize);
+  glBegin(GL_POINTS);
+  glVertex3f(0,0,0);
+  glEnd();
+}
+
+void drawText(std::string text)
+{
+    freeglut_minimal::glutStrokeString(freeglut_minimal::GLUT_STROKE_ROMAN, text.c_str());
+}
+
 } // end namespace
 } // end namespace

@@ -130,6 +130,11 @@ void G2O_OPENGL_API drawArrow2D(float len, float head_width, float head_len);
  */
 void G2O_OPENGL_API drawPoint(float  pointSize);
 
+/**
+ * draw text in 3D
+ */
+void G2O_OPENGL_API drawText(std::string text);
+
 
 // @}
 
