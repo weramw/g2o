@@ -309,7 +309,12 @@ void drawPoint(float pointSize){
 
 void drawText(std::string text)
 {
+    glPushMatrix();
+    float stroke_height = freeglut_minimal::glutStrokeHeight(freeglut_minimal::GLUT_STROKE_ROMAN);
+    float scale = 1./stroke_height;
+    glScalef(scale,scale,1.f);
     freeglut_minimal::glutStrokeString(freeglut_minimal::GLUT_STROKE_ROMAN, text.c_str());
+    glPopMatrix();
 }
 
 } // end namespace

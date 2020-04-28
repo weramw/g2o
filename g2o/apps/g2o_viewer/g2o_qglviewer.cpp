@@ -47,6 +47,9 @@
 #include <manipulatedCameraFrame.h>
 
 #include <iostream>
+
+#include <qmessagebox.h>
+
 using namespace std;
 
 namespace g2o {
@@ -125,6 +128,49 @@ void G2oQGLViewer::draw()
     glCallList(_drawList);
   }
 }
+
+void G2oQGLViewer::drawWithNames()
+{
+  if (! graph)
+    return;
+
+  if (_drawActions == 0) {
+    _drawActions = HyperGraphActionLibrary::instance()->actionByName("draw");
+    assert(_drawActions);
+  }
+
+  if (! _drawActions) // avoid segmentation fault in release build
+    return;
+
+  applyAction(graph, _drawActions, _drawActionParameters);
+}
+
+void G2oQGLViewer::postSelection(const QPoint &point)
+{
+  // Compute orig and dir, used to draw a representation of the intersecting
+  // line
+  //camera()->convertClickToLine(point, orig, dir);
+
+  // Find the selectedPoint coordinates, using camera()->pointUnderPixel().
+  //bool found;
+  //selectedPoint = camera()->pointUnderPixel(point, found);
+  //selectedPoint -= 0.01f * dir; // Small offset to make point clearly visible.
+  // Note that "found" is different from (selectedObjectId()>=0) because of the
+  // size of the select region.
+
+  if (selectedName() == -1)
+    QMessageBox::information(this, "No selection",
+                             "No object selected under pixel " +
+                                 QString::number(point.x()) + "," +
+                                 QString::number(point.y()));
+  else
+    QMessageBox::information(
+        this, "Selection",
+        "Object number " + QString::number(selectedName()) +
+            " selected under pixel " + QString::number(point.x()) + "," +
+            QString::number(point.y()));
+}
+
 
 void G2oQGLViewer::init()
 {

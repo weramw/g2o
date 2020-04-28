@@ -39,6 +39,8 @@ namespace g2o {
 
       ~G2oQGLViewer();
       void draw();
+      void drawWithNames();
+      void postSelection(const QPoint &point);
       void init();
 
       /**
