@@ -135,6 +135,10 @@ void G2O_OPENGL_API drawPoint(float  pointSize);
  */
 void G2O_OPENGL_API drawText(std::string text);
 
+/**
+ * get length of drawn text
+ */
+float G2O_OPENGL_API textLength(std::string text);
 
 // @}
 

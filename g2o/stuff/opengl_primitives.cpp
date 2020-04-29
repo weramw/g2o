@@ -317,5 +317,12 @@ void drawText(std::string text)
     glPopMatrix();
 }
 
+float textLength(std::string text)
+{
+    float stroke_height = freeglut_minimal::glutStrokeHeight(freeglut_minimal::GLUT_STROKE_ROMAN);
+    float length = freeglut_minimal::glutStrokeLength(freeglut_minimal::GLUT_STROKE_ROMAN, text.c_str());
+    return length/stroke_height;
+}
+
 } // end namespace
 } // end namespace
