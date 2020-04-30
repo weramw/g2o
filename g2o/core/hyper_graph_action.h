@@ -181,6 +181,7 @@ namespace g2o {
     class G2O_CORE_API Parameters: public HyperGraphElementAction::Parameters,  public PropertyMap{
     public:
       Parameters();
+      std::string selection_output;
     };
     DrawAction(const std::string& typeName_);
   protected:

@@ -121,9 +121,12 @@ void G2oQGLViewer::draw()
     return;
   if (_updateDisplay) {
     _updateDisplay = false;
+    _drawActionParameters->selection_output = "";
     glNewList(_drawList, GL_COMPILE_AND_EXECUTE);
     applyAction(graph, _drawActions, _drawActionParameters);
     glEndList();
+    std::cout << "selected data: " << std::endl;
+    std::cout << _drawActionParameters->selection_output << std::endl;
   } else {
     glCallList(_drawList);
   }
@@ -174,9 +177,9 @@ void G2oQGLViewer::postSelection(const QPoint &point)
         //    " selected under pixel " + QString::number(point.x()) + "," +
         //    QString::number(point.y()));
     }
-    g2o::IntProperty* select_prop = _drawActionParameters->getProperty<g2o::IntProperty>("SELECTED_ID");
-    if(select_prop){
-        select_prop->setValue(selectedName());
+    g2o::IntProperty* select_id = _drawActionParameters->getProperty<g2o::IntProperty>("SELECTED_ID");
+    if(select_id){
+        select_id->setValue(selectedName());
         setUpdateDisplay(true);
         update();
         emit propertyChanged();
