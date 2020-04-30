@@ -158,25 +158,28 @@ void G2oQGLViewer::postSelection(const QPoint &point)
     // Note that "found" is different from (selectedObjectId()>=0) because of the
     // size of the select region.
 
-    if (selectedName() < 0){
-        QMessageBox::information(this, "No selection",
-                                 "No object selected under pixel " +
-                                 QString::number(point.x()) + "," +
-                                 QString::number(point.y()));
+    int id = selectedName();
+    if(id < 0 ){
+        id = -1;
+    }
+    if(id < 0){
+        //QMessageBox::information(this, "No selection",
+        //                         "No object selected under pixel " +
+        //                         QString::number(point.x()) + "," +
+        //                         QString::number(point.y()));        
     }else{
         //QMessageBox::information(
         //    this, "Selection",
         //    "Object number " + QString::number(selectedName()) +
         //    " selected under pixel " + QString::number(point.x()) + "," +
         //    QString::number(point.y()));
-
-        g2o::IntProperty* select_prop = _drawActionParameters->getProperty<g2o::IntProperty>("SELECTED_ID");
-        if(select_prop){
-            select_prop->setValue(selectedName());
-            setUpdateDisplay(true);
-            update();
-            emit propertyChanged();
-        }
+    }
+    g2o::IntProperty* select_prop = _drawActionParameters->getProperty<g2o::IntProperty>("SELECTED_ID");
+    if(select_prop){
+        select_prop->setValue(selectedName());
+        setUpdateDisplay(true);
+        update();
+        emit propertyChanged();
     }
 }
 
