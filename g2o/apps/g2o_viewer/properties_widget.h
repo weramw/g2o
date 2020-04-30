@@ -45,7 +45,8 @@ class G2O_VIEWER_API PropertiesWidget : public QDialog, public Ui::BasePropertie
   public slots:
     void on_btnApply_clicked();
     void on_btnOK_clicked();
-
+    void on_propertyChanged();
+    
   protected:
     std::vector<std::string> _propNames;
     g2o::PropertyMap* _properties;

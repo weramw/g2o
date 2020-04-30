@@ -1,7 +1,7 @@
 # Qt5 was been find_package'd() by FindQGLViewer.cmake
 if(Qt5_FOUND)
   QT5_WRAP_UI(UI_HEADERS base_main_window.ui base_properties_widget.ui)
-  QT5_WRAP_CPP(UI_SOURCES main_window.h properties_widget.h)
+  QT5_WRAP_CPP(UI_SOURCES main_window.h properties_widget.h  g2o_qglviewer.h)
 
   include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Xml_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5OpenGL_INCLUDE_DIRS})
   string(APPEND qt5_includes_dirs "${Qt5Core_INCLUDE_DIRS} ${Qt5Xml_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5OpenGL_INCLUDE_DIRS}")

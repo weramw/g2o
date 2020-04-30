@@ -68,12 +68,23 @@ static std::string demangleName(const std::string& fullPropName)
 }
 
 ViewerPropertiesWidget::ViewerPropertiesWidget(QWidget * parent, Qt::WindowFlags f) :
-  PropertiesWidget(parent, f)
+    PropertiesWidget(parent, f), _viewer(NULL)
 {
 }
 
 ViewerPropertiesWidget::~ViewerPropertiesWidget()
 {
+}
+
+void ViewerPropertiesWidget::updateDisplayedProperties()
+{
+  PropertiesWidget::updateDisplayedProperties();
+
+  if(_viewer){
+      //draw with the new properties
+      _viewer->setUpdateDisplay(true);
+      _viewer->update();
+  }
 }
 
 void ViewerPropertiesWidget::applyProperties()
@@ -87,8 +98,13 @@ void ViewerPropertiesWidget::applyProperties()
 
 void ViewerPropertiesWidget::setViewer(g2o::G2oQGLViewer* viewer)
 {
+  if(_viewer){
+    QObject::disconnect(_viewer, SIGNAL(propertyChanged()), this, SLOT(on_propertyChanged()));
+  }
+    
   _viewer = viewer;
   setProperties(viewer->parameters());
+  QObject::connect(_viewer, SIGNAL(propertyChanged()), this, SLOT(on_propertyChanged()));
 }
 
 std::string ViewerPropertiesWidget::humanReadablePropName(const std::string& propertyName) const

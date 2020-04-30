@@ -147,28 +147,37 @@ void G2oQGLViewer::drawWithNames()
 
 void G2oQGLViewer::postSelection(const QPoint &point)
 {
-  // Compute orig and dir, used to draw a representation of the intersecting
-  // line
-  //camera()->convertClickToLine(point, orig, dir);
+    // Compute orig and dir, used to draw a representation of the intersecting
+    // line
+    //camera()->convertClickToLine(point, orig, dir);
 
-  // Find the selectedPoint coordinates, using camera()->pointUnderPixel().
-  //bool found;
-  //selectedPoint = camera()->pointUnderPixel(point, found);
-  //selectedPoint -= 0.01f * dir; // Small offset to make point clearly visible.
-  // Note that "found" is different from (selectedObjectId()>=0) because of the
-  // size of the select region.
+    // Find the selectedPoint coordinates, using camera()->pointUnderPixel().
+    //bool found;
+    //selectedPoint = camera()->pointUnderPixel(point, found);
+    //selectedPoint -= 0.01f * dir; // Small offset to make point clearly visible.
+    // Note that "found" is different from (selectedObjectId()>=0) because of the
+    // size of the select region.
 
-  if (selectedName() == -1)
-    QMessageBox::information(this, "No selection",
-                             "No object selected under pixel " +
+    if (selectedName() < 0){
+        QMessageBox::information(this, "No selection",
+                                 "No object selected under pixel " +
                                  QString::number(point.x()) + "," +
                                  QString::number(point.y()));
-  else
-    QMessageBox::information(
-        this, "Selection",
-        "Object number " + QString::number(selectedName()) +
-            " selected under pixel " + QString::number(point.x()) + "," +
-            QString::number(point.y()));
+    }else{
+        //QMessageBox::information(
+        //    this, "Selection",
+        //    "Object number " + QString::number(selectedName()) +
+        //    " selected under pixel " + QString::number(point.x()) + "," +
+        //    QString::number(point.y()));
+
+        g2o::IntProperty* select_prop = _drawActionParameters->getProperty<g2o::IntProperty>("SELECTED_ID");
+        if(select_prop){
+            select_prop->setValue(selectedName());
+            setUpdateDisplay(true);
+            update();
+            emit propertyChanged();
+        }
+    }
 }
 
 

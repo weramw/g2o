@@ -32,6 +32,7 @@ namespace g2o {
    */
   class G2O_VIEWER_API G2oQGLViewer : public QGLViewer
   {
+    Q_OBJECT
     public:
       G2oQGLViewer(QWidget* parent=NULL, const QGLWidget* shareWidget=0, Qt::WindowFlags flags=0);
       G2oQGLViewer(const G2oQGLViewer&) = delete;
@@ -52,6 +53,9 @@ namespace g2o {
 
       DrawAction::Parameters* parameters() { return _drawActionParameters;}
 
+    signals:
+      void propertyChanged();
+      
     public:
       SparseOptimizer* graph;
 

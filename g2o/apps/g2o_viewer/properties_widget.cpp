@@ -132,6 +132,11 @@ void PropertiesWidget::on_btnOK_clicked()
   close();
 }
 
+void PropertiesWidget::on_propertyChanged()
+{
+    updateDisplayedProperties();
+}
+
 std::string PropertiesWidget::humanReadablePropName(const std::string& propertyName) const
 {
   return propertyName;
