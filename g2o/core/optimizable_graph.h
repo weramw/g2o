@@ -323,7 +323,7 @@ namespace g2o {
         CacheContainer* cacheContainer();
       protected:
         OptimizableGraph* _graph;
-        Data* _userData;
+//        Data* _userData;
         int _hessianIndex;
         bool _fixed;
         bool _marginalized;

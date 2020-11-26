@@ -53,7 +53,8 @@ namespace g2o {
 
   OptimizableGraph::Vertex::Vertex() :
     HyperGraph::Vertex(),
-    _graph(0), _userData(0), _hessianIndex(-1), _fixed(false), _marginalized(false),
+    HyperGraph::DataContainer(),
+    _graph(0), _hessianIndex(-1), _fixed(false), _marginalized(false),
     _colInHessian(-1), _cacheContainer(0)
   {
   }

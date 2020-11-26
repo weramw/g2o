@@ -124,7 +124,17 @@ namespace g2o {
           const Data* userData() const { return _userData; }
           Data* userData() { return _userData; }
           void setUserData(Data* obs) { _userData = obs;}
-          void addUserData(Data* obs) { if (obs) { obs->setNext(_userData); _userData=obs; } }
+          void addUserData(Data* obs) {
+              if (obs) {
+                  obs->setNext(_userData);
+                  _userData=obs;
+              }
+          }
+          void addUserData(const std::vector<Data*>& obs) {
+              for(int i = 0; i < obs.size(); ++i){
+                  addUserData(obs[i]);
+              }
+          }
         protected:
           Data* _userData;
       };
