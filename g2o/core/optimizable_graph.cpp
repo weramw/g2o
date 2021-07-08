@@ -76,7 +76,9 @@ namespace g2o {
   OptimizableGraph::Vertex::~Vertex()
   {
     delete _cacheContainer;
-    delete _userData;
+    //delete _userData; // preventing double delete
+    // _userData is inherited from DataContainer Base Class 
+    // and already deleted in the destructor of DataContainer
   }
 
   OptimizableGraph::Vertex* OptimizableGraph::Vertex::clone() const
