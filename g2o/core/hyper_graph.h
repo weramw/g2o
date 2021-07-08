@@ -131,7 +131,7 @@ namespace g2o {
               }
           }
           void addUserData(const std::vector<Data*>& obs) {
-              for(int i = 0; i < obs.size(); ++i){
+              for(size_t i = 0; i < obs.size(); ++i){
                   addUserData(obs[i]);
               }
           }
